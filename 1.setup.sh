@@ -41,44 +41,44 @@ setup_system() {
 
 }
 
-# Function to set up the git alias
-setup_git_alias() {
-    # 1. Define the function and alias
-    GIT_ALIAS_CONTENT="
-    # Function to handle git commit and push with a message
-    git_push() {
-        if [ -z \"\$1\" ]; then
-            echo \"You must provide a commit message.\"
-        else
-            git add .
-            git commit -m \"\$1\"
-            git push
+# Function to set up all your aliases
+setup_aliases() {
+    # Define a function to easily create new aliases
+    add_alias() {
+        local alias_name="$1"
+        local alias_command="$2"
+
+        # Check if the alias already exists
+        if grep -q "^alias $alias_name='.*'" ~/.bashrc; then
+            echo "Alias '$alias_name' already exists."
+            return
         fi
+
+        # Append the new alias to .bashrc
+        echo "alias $alias_name='$alias_command'" >> ~/.bashrc
+        echo "Added alias '$alias_name'."
     }
 
-    # Alias to call the git_push function
-    alias push='git_push'
-    "
+    # Create your desired aliases
+    add_alias push 'git_push() {
+        if [ -z "$1" ]; then
+            echo "You must provide a commit message."
+        else
+            git add .
+            git commit -m "$1"
+            git push
+        fi
+    }'
 
-    # 2. Check if already present in .bashrc
-    if grep -q "git_push()" ~/.bashrc; then
-        echo "The 'git_push' alias is already present in your ~/.bashrc file."
-    else
-        # 3. Append to .bashrc
-        echo "$GIT_ALIAS_CONTENT" >> ~/.bashrc
-        echo "The 'git_push' alias has been added to your ~/.bashrc file."
+    add_alias gg 'go run .'
 
-        # 4. Source .bashrc
-        source ~/.bashrc
-        echo "Your ~/.bashrc file has been sourced."
-    fi
+    # Add more aliases here in the same format:
+    # add_alias <alias_name> '<alias_command>'
 }
 
-alias setpush='setup_git_alias && source ~/.bashrc'
+# Call the function to set up the aliases
+alias setal='setup_aliases && source ~/.bashrc'
 alias setup='setup_system'
-
-
-
 
 
 
