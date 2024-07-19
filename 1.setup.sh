@@ -2,11 +2,11 @@
 
 setup_system() {
 
-    # Set keyboard layout to French (AZERTY) and make it primary
-    setxkbmap -layout fr -variant azerty
+    # Set keyboard layout to French (AZERTY) and add English and Arabic layouts
+    setxkbmap -layout fr,us,ar -variant azerty, , -option 'grp:win_space_toggle'
     # Make the change permanent for X session
-    gsettings set org.gnome.desktop.input-sources sources "[('xkb', 'fr')]"
-    echo "Keyboard layout set to French (AZERTY) and made primary."
+    gsettings set org.gnome.desktop.input-sources sources "[('xkb', 'fr'), ('xkb', 'us'), ('xkb', 'ar')]"
+    echo "Keyboard layout set to French (AZERTY) as primary, with English and Arabic added. Switch using Windows key + Space."
 
     # Set automatic suspend settings
     TIME=180  # Time in minutes
@@ -38,6 +38,10 @@ setup_system() {
     echo "kinoz01"
     echo "ayoub-ammar@protonmail.com"
     echo "singthatmoments"
+
+}
+
+set_keybord() {
 
 }
 
@@ -77,6 +81,7 @@ setup_git_alias() {
 
 alias setpush='setup_git_alias && source ~/.bashrc'
 alias setup='setup_system'
+
 
 
 
