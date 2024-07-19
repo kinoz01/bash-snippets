@@ -41,11 +41,6 @@ setup_system() {
 
 }
 
-set_keybord() {
-
-}
-
-
 # Function to set up the git alias
 setup_git_alias() {
     # 1. Define the function and alias
