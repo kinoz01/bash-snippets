@@ -71,7 +71,7 @@ setup_aliases() {
     }'
 
     add_alias gg 'go run .'
-
+    
     add_alias gm 'go run main.go'
 
     # Add more aliases here in the same format:
