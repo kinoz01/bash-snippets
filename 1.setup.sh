@@ -20,16 +20,9 @@ setup_system() {
 
     echo "Automatic suspend set to $TIME minutes."
 
-    # Night-Light Setting
-    start_time=$(date -d "21:00" +%s)
-    end_time=$(date -d "20:00" +%s)
-    gsettings set org.gnome.settings-daemon.plugins.color night-light-enabled true
-    gsettings set org.gnome.settings-daemon.plugins.color night-light-temperature 3000
-    gsettings set org.gnome.settings-daemon.plugins.color night-light-schedule-from $start_time
-    gsettings set org.gnome.settings-daemon.plugins.color night-light-schedule-to $end_time
-
 
     # Open Web Session
+    google-chrome "https://discord.com/login"
     google-chrome "https://github.com/login"
     google-chrome "https://learn.zone01oujda.ma/"
     google-chrome "https://auth.openai.com/authorize?client_id=TdJIcbe16WoTHtN95nyywh5E4yOo6ItG&scope=openid%20email%20profile%20offline_access%20model.request%20model.read%20organization.read%20organization.write&response_type=code&redirect_uri=https%3A%2F%2Fchatgpt.com%2Fapi%2Fauth%2Fcallback%2Flogin-web&audience=https%3A%2F%2Fapi.openai.com%2Fv1&device_id=80ee945e-9b60-4ada-801c-4e0124ff0624&prompt=login&screen_hint=login&ext-statsig-tier=production&ext-oai-did=80ee945e-9b60-4ada-801c-4e0124ff0624&flow=control&state=3dRYWdF0UuNNDoexTRDYJ6_8smYIPUtNQRxdLk9QCAg&code_challenge=Wr5hUWjnYMVO7YBMbu2rGBBjBzDKepk9ltbXxlFe2-Q&code_challenge_method=S256"
@@ -73,6 +66,8 @@ setup_aliases() {
     add_alias gg 'go run .'
     
     add_alias gm 'go run main.go'
+
+    add_alias gbb 'go build -o zapp . && ./zapp'
 
     # Add more aliases here in the same format:
     # add_alias <alias_name> '<alias_command>'
